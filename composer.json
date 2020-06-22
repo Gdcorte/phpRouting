@@ -1,0 +1,10 @@
+{
+    "name": "gusta/php-routing",
+    "authors": [
+        {
+            "name": "Gustavo",
+            "email": "gustavodacorte@gmail.com"
+        }
+    ],
+    "require": {}
+}
