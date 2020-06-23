@@ -7,8 +7,6 @@ Class AuthController extends BaseController{
     }
 
     public function index($request){
-        $view = $this->renderView("Auth/index.php");
-
-        echo $view;
+        $this->renderView("Auth/index.php");
     }
 }

@@ -24,7 +24,7 @@ class BaseController{
         $renderedView = ob_get_contents(); 
         ob_end_clean();
 
-        return $renderedView;
+        echo $renderedView;
     }
 
 }

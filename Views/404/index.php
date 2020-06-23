@@ -6,6 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Sorry, the page requested was not found in our servers!</h1>
+    <h1>Sorry m8, the page requested was not found in our servers!</h1>
 </body>
 </html>

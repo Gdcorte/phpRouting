@@ -2,6 +2,8 @@
 namespace Routes;
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use Controllers\NotFoundController;
+
 class Router{
     protected $routeMap;
 
@@ -22,10 +24,10 @@ class Router{
     }
 
     public function redirectToRoute($route, $method){
-        if (!(isset($this->routeMap[$method][$route]))){
-            // ROUTE NOT FOUND, 404!
-            echo "SORRY, NOT FOUND!";
-        }else{
+        if (!(isset($this->routeMap[$method][$route]))){ //Route not found
+            $controller = new NotFoundController();
+            $controller->index();
+        }else{ //Proceed to Route if middleware allows it
             $this->checkController($route, $method);
         }   
     }
@@ -57,6 +59,7 @@ class Router{
 
         // Determines if user can be redirected or if he is not allowed to do such
         if($result == $namedRoute){
+            // Executes action
             $action = $Obj['Action'];
             $myController->$action($request);
         }else{
