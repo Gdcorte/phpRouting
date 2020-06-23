@@ -1,4 +1,7 @@
 <?php
+// This is a generic purpose basic MVC framework built for personal uses
+// Developed by: Gustavo Diniz da Corte
+// Email: gustavodacorte@gmail.com
 session_start();
 require_once __DIR__ . '/../vendor/autoload.php';
 
