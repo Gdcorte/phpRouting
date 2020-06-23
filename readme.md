@@ -6,6 +6,7 @@ This is a generic purpose basic MVC framework built for personal uses.
 The purpose of development was to have a better undertanding of the MVC architecture and to study its implementation.
 
 How to run:
+First it is important to run composer, since its autoload and namespacing are sued to make the project function properly.
 To run this project you must set it up on a apache webserver. The webserver must point to the public folder.
 Inside the public folder .htaccess will redirect all incoming requests through a router and activate the controllers to return the Views. 
 Plase note that since this is a very basic axample, the Model layer has not been done yet.
