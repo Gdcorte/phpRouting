@@ -2,7 +2,7 @@
 Developed by: Gustavo Diniz da Corte
 Email: gustavodacorte@gmail.com
 
-This is a generic purpose basic MVC framework built for personal uses.
+This is a generic purpose basic MVC framework built for personal uses. Also, this project makes use of middlewares to help control user permissions.
 The purpose of development was to have a better undertanding of the MVC architecture and to study its implementation.
 
 How to run:
