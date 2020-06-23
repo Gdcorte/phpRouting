@@ -1,9 +1,9 @@
 <?php
+namespace Middlewares;
+require_once __DIR__ . '/../vendor/autoload.php';
 
 class AuthMiddleware{
-
     public static function handle($requestUrl){
-        session_start();
         if (!isset($_SESSION['USER_ID'])){
             return "/login";
         }else{

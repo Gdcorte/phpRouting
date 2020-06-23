@@ -6,7 +6,6 @@
     <title>Document</title>
 </head>
 <body>
-    YOU ARE NOT AUTHENTICATED, I WILL AUTHENTICATE YOU BASTARD!
-    <?php echo "<br>" . $_SERVER['DOCUMENT_ROOT'] . "<br> AND TAKE YOU TO: " . $_SESSION['targetUri'] ; ?>
+    <h1>Sorry, the page requested was not found in our servers!</h1>
 </body>
 </html>
