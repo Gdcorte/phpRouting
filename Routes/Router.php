@@ -25,11 +25,16 @@ class Router{
 
     public function redirectToRoute($route, $method){
         if (!(isset($this->routeMap[$method][$route]))){ //Route not found
-            $controller = new NotFoundController();
-            $controller->index();
+            $this->redirectToNotFound();
         }else{ //Proceed to Route if middleware allows it
             $this->checkController($route, $method);
         }   
+    }
+
+    private function redirectToNotFound(){
+        $controller = new NotFoundController();
+        $controller->index();
+        die;
     }
 
     private function createController($route, $method){
@@ -37,9 +42,23 @@ class Router{
         $controller = 'Controllers\\' . $urlParams[1] . "Controller";
         $action = $urlParams[2];
 
+        $routeType = explode('/',$route)[1];
+
+        //Require a token for all routes that starts with api, ajax or have its method set to post
+        if( ($routeType=='api')||($routeType=='ajax')||($method=='POST') ){
+            if(!isset($_REQUEST['token'])){
+                $this->redirectToNotFound();
+            }else{
+                $token = $_REQUEST['token'];
+            }
+        }else{ //Don't require token for get routes that are not called through an API
+            $token = "";
+        }
+
         return [
             'Controller'=>$controller,
             'Action'=>$action,
+            'token'=>$token,
         ];
     }
 
@@ -47,7 +66,7 @@ class Router{
         $Obj = $this->createController($namedRoute, $method);
         $controller = $Obj['Controller'];
 
-        $myController = new $controller($namedRoute, $method);
+        $myController = new $controller($namedRoute, $method, $Obj['token']);
         $result = $myController->checkAccess();
 
         // Get Request parameters
@@ -63,8 +82,8 @@ class Router{
             $action = $Obj['Action'];
             $myController->$action($request);
         }else{
-            // Redirects to where user should go
-            header('Location: '. $_SERVER['REQUEST_SCHEME'] . '://'. $_SERVER['SERVER_NAME'] . $result);
+            $_SESSION['targetUri'] = $_SERVER['REQUEST_URI']; //Saves where user was trying to go before
+            header('Location: '. $_SERVER['REQUEST_SCHEME'] . '://'. $_SERVER['SERVER_NAME'] . $result);  // Redirects to where user should go
         }
     }
 
