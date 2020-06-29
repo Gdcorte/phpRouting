@@ -4,9 +4,17 @@ require_once __DIR__ . '/../vendor/autoload.php';
 
 use Controllers\NotFoundController;
 
+/**
+ * Class that creates a routemap and defines which actions should be performed by each route.
+ */
 class Router{
     protected $routeMap;
 
+    /**
+     * Creates a route map. All routes that are used in the system should be mapped here.
+     * The array should be separate for different routing methods and the array's key should be the route the user will see in its browser, 
+     * where the value is another route in the fashion: /{Controller}/{Action}. This mapped route will pass the request parameters to the specified controller's action
+     */
     function __construct(){
         $getRoutes = [
             "/login" => '/Auth/index',
@@ -23,6 +31,13 @@ class Router{
         ];
     }
 
+    /**
+     * Check if routes exist. Shows the user a 404 page if route is not found and check if the current user/API request has enough access right to go to the route.
+     * @param $route - The browser route that will be mapped into the controller/action
+     * @param $method - The method used to access the route.
+     * 
+     * @return null
+     */
     public function redirectToRoute($route, $method){
         if (!(isset($this->routeMap[$method][$route]))){ //Route not found
             $this->redirectToNotFound();
@@ -31,12 +46,25 @@ class Router{
         }   
     }
 
+
+    /**
+     *  Method that redirects the suer to the 404 not found view (controlled by the NotFound Controller. 
+     * its page and controller action can be customized to best fit the dev needs.)
+     */
     private function redirectToNotFound(){
         $controller = new NotFoundController();
         $controller->index();
         die;
     }
 
+
+    /**
+     *  Unwrap the controller, along with its action and a possible token (for API access)
+     * @param $route - The browser route that will be mapped into the controller/action
+     * @param $method - The method used to access the route.
+     * 
+     * @return $controller, $action, $token in a single object 
+     */
     private function createController($route, $method){
         $urlParams = explode("/",$this->routeMap[$method][$route]);
         $controller = 'Controllers\\' . $urlParams[1] . "Controller";
@@ -62,6 +90,16 @@ class Router{
         ];
     }
 
+    /**
+     * After mapping the correct course of action to be taken, a new controller instance is created to check if the user has access
+     * to the route (The check is made through the use of middlewares that can be easily customized by the user and are invoked when creating the controller instance).
+     * If the user has access to the page, redirects him to the requested page. If not, redirects him to a page defined by the middleware.
+     * 
+     * @param $namedRoute - The custom user defined route
+     * @param $method - The request method
+     * 
+     * @return null
+     */
     private function checkController($namedRoute, $method){
         $Obj = $this->createController($namedRoute, $method);
         $controller = $Obj['Controller'];
