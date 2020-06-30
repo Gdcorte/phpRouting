@@ -1,4 +1,10 @@
 <?php
+/**
+ *  Developed by: Gustavo Diniz da Corte
+ *  Email: gustavodacorte@gmail.com
+ */
+// 
+
 namespace Controllers;
 
 Class AuthController extends BaseController{

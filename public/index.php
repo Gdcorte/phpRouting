@@ -1,6 +1,7 @@
 <?php
+// This is a generic purpose basic MVC framework built for personal uses/studies
 /**
- * This is a generic purpose basic MVC framework built for personal uses/studies
+
  *  Developed by: Gustavo Diniz da Corte
  *  Email: gustavodacorte@gmail.com
  */
