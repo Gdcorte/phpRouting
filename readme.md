@@ -28,4 +28,4 @@ For convenience, a Modules and Common layer were created. Since a project usuall
 The View layer is supposed to hold the actual web page, which in turn can make use of several modules and also common modules to its operation. It is suggested that templating is done through the Common layer, since a template will be used in multiple views and to avoid code repetition.
 
 # Final Regards:
-Thank you for reading through this documentation and for your interest in this framework, I am Gustavo Diniz da Corte, currently working as a software engineer focused on web development. Please note that since this framework is supposed to be a study on how more robust frameworks work, this project will not be updated regularly. Please if you have any contribution you want to make to this framework, it would be more than welcome!
+Thank you for reading through this documentation and for your interest in this framework. Please note that since this framework is supposed to be a study case on how more robust frameworks work, this project will not be updated regularly. Please if you have any contribution you want to make to this framework, it would be more than welcome!
