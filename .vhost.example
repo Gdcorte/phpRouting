@@ -1,0 +1,13 @@
+# Basic php routing project
+<VirtualHost *:80>
+  DocumentRoot "D:/GitHub/phpRouting/public"
+  ServerName phpRouting.local
+  ServerAlias phpRouting.local
+  <Directory "D:/GitHub/phpRouting/public">
+    Options +Indexes +Includes +FollowSymLinks +MultiViews
+    AllowOverride All
+    Require all granted
+
+    DirectoryIndex index.php
+  </Directory>
+</VirtualHost>
